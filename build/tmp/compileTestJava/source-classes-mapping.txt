@@ -1,8 +1,0 @@
-com/assignment/model/BoardTest.java
- com.assignment.model.BoardTest
-com/assignment/model/DiceTest.java
- com.assignment.model.DiceTest
-com/assignment/utils/NumberPickerTest.java
- com.assignment.utils.NumberPickerTest
-com/assignment/GameTest.java
- com.assignment.GameTest
