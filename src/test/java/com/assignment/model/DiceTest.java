@@ -17,7 +17,7 @@ class DiceTest {
    @ParameterizedTest
    void shouldGenerateNumber(final int min, final int max) {
       NumberPicker numberPicker = new NumberPicker(min, max);
-      Dice dice = new Dice(numberPicker);
+      Dice dice = new FairDice(numberPicker);
       int number = dice.roll();
       assertTrue(number >= min && number <= max);
    }
