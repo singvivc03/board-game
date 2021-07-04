@@ -1,5 +1,6 @@
 package com.assignment.model;
 
+import com.assignment.exceptions.IllegalSnakePosition;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -42,5 +43,31 @@ class BoardTest {
       Arrays.stream(moveBy.split(";")).map(it -> Integer.parseInt(it))
          .forEach(move -> board.updatePosition(move));
       assertThat(board.getCurrentCoinPosition(), is(expectedPosition));
+   }
+
+   @CsvSource({
+      "100, 14, 7",
+      "10, 9, 1",
+      "15, 14, 2",
+   })
+   @ParameterizedTest
+   void shouldAddPositionOfSnakesOnTheBoard(final int boardSize, final int startPosition, final int endPosition) {
+      Board board = new Board(boardSize);
+      board.addSnake(startPosition, endPosition);
+      assertThat(board.getBoard()[startPosition], is(endPosition));
+   }
+
+   @CsvSource({
+      "100, 101, 90",
+      "100, 9, 10",
+      "100, 10, -1",
+      "100, -1, 1",
+      "100, -1, -1",
+      "100, 100, 90"
+   })
+   @ParameterizedTest
+   void shouldThrowIllegalSnakePosition(final int boardSize, final int startPosition, final int endPosition) {
+      Board board = new Board(boardSize);
+      assertThrows(IllegalSnakePosition.class, () -> board.addSnake(startPosition, endPosition));
    }
 }
