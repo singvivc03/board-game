@@ -48,13 +48,13 @@ class BoardTest {
    @CsvSource({
       "100, 14, 7",
       "10, 9, 1",
-      "15, 15, 2",
+      "15, 14, 2",
    })
    @ParameterizedTest
    void shouldAddPositionOfSnakesOnTheBoard(final int boardSize, final int startPosition, final int endPosition) {
       Board board = new Board(boardSize);
       board.addSnake(startPosition, endPosition);
-      assertThat(board.getBoard()[startPosition - 1], is(endPosition - 1));
+      assertThat(board.getBoard()[startPosition], is(endPosition));
    }
 
    @CsvSource({
@@ -62,7 +62,8 @@ class BoardTest {
       "100, 9, 10",
       "100, 10, -1",
       "100, -1, 1",
-      "100, -1, -1"
+      "100, -1, -1",
+      "100, 100, 90"
    })
    @ParameterizedTest
    void shouldThrowIllegalSnakePosition(final int boardSize, final int startPosition, final int endPosition) {
