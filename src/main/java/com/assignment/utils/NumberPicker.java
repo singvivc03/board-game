@@ -17,4 +17,12 @@ public class NumberPicker {
    public int getNumber() {
       return numberGenerator.nextInt(max - min + 1) + min;
    }
+
+   public int getCrookedNumber() {
+      int min = this.min;
+      if (min % 2 != 0) {
+         ++min;
+      }
+      return min + 2 * numberGenerator.nextInt((max - min) / 2 + 1);
+   }
 }
