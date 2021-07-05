@@ -64,7 +64,7 @@ class GameTest {
    void shouldPlayGameWithCrookedDice(final int boardSize, final int moveBy, final int expectedNextPosition) {
       Board board = new Board(boardSize);
       Game game = new Game(board, new CrookedDice(numberPicker));
-      Mockito.when(numberPicker.getNumber()).thenReturn(moveBy);
+      Mockito.when(numberPicker.getCrookedNumber()).thenReturn(moveBy);
       int nextPosition = game.play();
       assertEquals(nextPosition, expectedNextPosition);
    }
