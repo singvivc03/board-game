@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/singvivc03/board-game/tree/master.svg?style=svg)](https://circleci.com/gh/singvivc03/board-game/tree/master)
+[![CircleCI](https://circleci.com/gh/singvivc03/board-game/tree/master.svg?style=shield)](https://circleci.com/gh/singvivc03/board-game/tree/master)
 
 # board-game
 A simple snake ladder game simulator
