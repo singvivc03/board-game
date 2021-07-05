@@ -10,6 +10,6 @@ public class CrookedDice extends Dice {
 
    @Override
    public int roll() {
-      return numberPicker.getNumber();
+      return numberPicker.getCrookedNumber();
    }
 }
