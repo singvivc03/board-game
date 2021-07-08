@@ -1,9 +1,6 @@
 package com.assignment;
 
-import com.assignment.model.Board;
-import com.assignment.model.CrookedDice;
-import com.assignment.model.Dice;
-import com.assignment.model.FairDice;
+import com.assignment.model.*;
 import com.assignment.utils.NumberPicker;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -46,7 +43,7 @@ class GameTest {
    void shouldPlayGameOfBoardWithSnakes(final int size, final int snakeStartPosition, final int snakeEndPosition,
                                         final String moves, final int expectedFinalPosition) {
       Board board = new Board(size);
-      board.addSnake(snakeStartPosition, snakeEndPosition);
+      board.addSnake(snakeStartPosition, new NormalSnake(snakeStartPosition - snakeEndPosition));
       Game game = new Game(board, new FairDice(numberPicker));
       Arrays.stream(moves.split(";")).map(Integer::parseInt).forEach(move -> {
          Mockito.when(numberPicker.getNumber()).thenReturn(move);

@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -41,20 +42,23 @@ class BoardTest {
       Board board = new Board(size);
       assertThat(board.getCurrentCoinPosition(), is(0));
       Arrays.stream(moveBy.split(";")).map(it -> Integer.parseInt(it))
-         .forEach(move -> board.updatePosition(move));
+         .forEach(move -> board.updatePosition(move, 1));
       assertThat(board.getCurrentCoinPosition(), is(expectedPosition));
    }
 
    @CsvSource({
-      "100, 14, 7",
-      "10, 9, 1",
-      "15, 14, 2",
+      "100, 14, 7, 7",
+      "10, 9, 1, 8",
+      "15, 14, 2, 12",
    })
    @ParameterizedTest
-   void shouldAddPositionOfSnakesOnTheBoard(final int boardSize, final int startPosition, final int endPosition) {
+   void shouldAddPositionOfSnakesOnTheBoard(final int boardSize, final int startPosition, final int endPosition,
+                                            final int expectedLength) {
       Board board = new Board(boardSize);
-      board.addSnake(startPosition, endPosition);
-      assertThat(board.getBoard()[startPosition], is(endPosition));
+      board.addSnake(startPosition, new NormalSnake(startPosition - endPosition));
+      assertThat(board.getBoard()[startPosition].getPiece(), instanceOf(NormalSnake.class));
+      Snake snake = (Snake) board.getBoard()[startPosition].getPiece();
+      assertThat(snake.getLength(), is(expectedLength));
    }
 
    @CsvSource({
@@ -68,6 +72,7 @@ class BoardTest {
    @ParameterizedTest
    void shouldThrowIllegalSnakePosition(final int boardSize, final int startPosition, final int endPosition) {
       Board board = new Board(boardSize);
-      assertThrows(IllegalSnakePosition.class, () -> board.addSnake(startPosition, endPosition));
+      assertThrows(IllegalSnakePosition.class,
+         () -> board.addSnake(startPosition, new NormalSnake(startPosition - endPosition)));
    }
 }

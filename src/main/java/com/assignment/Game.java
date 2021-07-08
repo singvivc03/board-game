@@ -15,7 +15,6 @@ public class Game {
 
    public int play() {
       int nextPosition = dice.roll();
-      int currentPosition = board.updatePosition(nextPosition);
-      return currentPosition;
+      return board.updatePosition(nextPosition, 1);
    }
 }
